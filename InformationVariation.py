@@ -21,14 +21,14 @@ class VectorData:
             self.total_count += occurences
         return count_dict
     def vec_entropy(self):
-        ent_dict = {}
+        term_ent = {}
         for entry in self.vector_data:
             hw = 0
             for elem in self.vector_data['elements']:
                 px = float(self.term_counts[elem])/(2*self.total_count)
                 wi = px * math.log(px, 2)
                 hw -= wi
-            ent_dict[entry] = {elem : { 'px' : px, 'hw' : hw } }   ##### Calculate the mutual info here two guy!
+            ent_dict[entry] = {elem : { 'px' : px, 'hw' : hw } } 
         return ent_dict
     def v_information(self):
         v_info = {}
@@ -41,12 +41,9 @@ class VectorData:
                     pass
                 else:
                     pxy = float(cooc)/self.total_count
-                    ixy = pxy * math.log((pxy/(vec
+            #        ixy = pxy * math.log((pxy/(vec
 
 
-
-
-                self.vector_data['elements'][dim]
 
 
 if __name__ == '__main__':
@@ -58,6 +55,9 @@ if __name__ == '__main__':
     raw_counts = db.row_vecs.find()
     collection = db.tfidf_vecs
     
-    vec_data = VectorData(raw_counts)
+    #vec_data = VectorData(raw_counts)
+    for obj in raw_counts:
+        print obj['word'], len(obj['elements'])
+
 
 
